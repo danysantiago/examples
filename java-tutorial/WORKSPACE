@@ -1,0 +1,13 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+rules_kotlin_version = "legacy-1.4.0-rc1"
+rules_kotlin_sha = "a8c40b42b74ce2f15a3a614cc80b8b7ac8f2ad7069731f5898b89c606811907b"
+http_archive(
+    name = "io_bazel_rules_kotlin",
+    urls = ["https://github.com/bazelbuild/rules_kotlin/releases/download/%s/rules_kotlin_release.tgz" % rules_kotlin_version],
+    sha256 = rules_kotlin_sha,
+)
+
+load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kotlin_repositories", "kt_register_toolchains")
+kotlin_repositories() # if you want the default. Otherwise see custom kotlinc distribution below
+kt_register_toolchains() # to use the default toolchain, otherwise see toolchains below
